@@ -1,0 +1,550 @@
+$status-colors: (
+    primary: rgb(36, 36, 228),
+    success: rgb(108, 248, 108),
+    info: rgb(94, 94, 219),
+    danger: rgb(241, 26, 109),
+    warning: rgb(213, 108, 223)
+);
+
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+}
+
+// border
+.border-bottom-zero{
+    border-bottom: 0;
+}
+
+.border-left-zero{
+    border-left: 0;
+}
+
+.border-right-zero{
+    border-right: 0;
+}
+
+.border-top-zero{
+    border-top: 0;
+}
+
+@mixin borderZero($forOne, $forTwo) {
+    border-#{$forOne}: none;
+    border-#{$forTwo}: none;
+}
+
+.border-topleft-zero{
+    @include borderZero(top, left);
+}
+
+.border-topright-zero{
+    @include borderZero(top, right);
+}
+
+.border-topbottom-zero{
+    @include borderZero(top, bottom)
+}
+
+.border-lefttop-zero{
+    @include borderZero(left, top);
+}
+
+.border-leftright-zero{
+    @include borderZero(left, right);
+}
+
+.border-leftbottom-zero{
+    @include borderZero(left, bottom)
+}
+
+.border-righttop-zero{
+    @include borderZero(right, top);
+}
+
+.border-rightbottom-zero{
+    @include borderZero(right, bottom);
+}
+// flex
+.flex{
+    display: flex;
+}
+
+.flex--alignCenter{
+    align-items: center;
+}
+
+.flex--alignFlexStart{
+    align-items: flex-start;
+}
+
+.flex--alignFlexEnd{
+    align-items: flex-end;
+}
+
+.flex--alignEnd{
+    align-items: end;
+}
+
+.flex--alignBaseline{
+    align-items: baseline;
+}
+
+.flex--justifyCenter{
+    justify-content: center;
+}
+
+.flex--justifySpaceBtw{
+    justify-content: space-between;
+}
+
+.flex--justifySpaceArn{
+    justify-content: space-around;
+}
+
+.flex--justifySpaceEvn{
+    justify-content: space-evenly;
+}
+
+.flex--cc{
+    @extend .flex;
+    @extend .flex--alignCenter;
+    @extend .flex--justifyCenter;
+}
+
+.flex--cb{
+    @extend .flex;
+    @extend .flex--alignCenter;
+    @extend .flex--justifySpaceBtw;
+}
+
+.btn{
+    display: block;
+
+    max-width: 10rem;
+    text-decoration: none;
+
+    letter-spacing: .2rem;
+
+    padding: .6rem 2.4rem;
+    text-align: center;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    text-transform: uppercase;
+
+    color: #fff;
+
+    @if(background-color: #fff){
+        color: #000;
+    }
+
+    background-color: transparent;
+
+    outline: none;
+
+    border: 3px solid rgba(255, 0, 0, 0.61);
+    border-radius: 10px;
+
+    @each $i, $color in $status-colors{
+        &--#{$i}{
+            background-color: $color;
+            color: #fff;
+        }
+    }
+}
+
+
+@for $i from 1 through 1000 {
+    .fz-#{$i}{
+        font-size: #{$i}px;
+    }
+}
+
+// isHeading
+
+[headerText]{
+    margin: 135px 45px;
+}
+
+[headerTitle]{
+    margin: 240px 70px;
+}
+
+[headerText],
+[headerTitle]{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    @extend .fz-40;
+}
+
+// Grid
+.grid{
+    display: grid;
+}
+
+.grid-column-flow{
+    @extend .grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+    grid-auto-flow: column dense;
+}
+
+.grid-row-flow{
+    @extend .grid;
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+
+    grid-auto-flow: row dense;
+}
+
+.grid-column{
+    @extend .grid;
+    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.grid-row{
+    @extend .grid;
+    grid-template-rows: 1fr;
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+// li
+.list-group{
+    padding: 1rem;
+    list-style-type: none;
+
+    font-size: inherit;
+
+    display: grid;
+
+    &--c{
+        justify-content: center;
+    }
+
+    &--s{
+        justify-content: space-between;
+    }
+
+    &--a{
+        justify-content: space-around;
+    }
+
+    &--e{
+        justify-content: space-evenly;
+    }
+
+    @for $item from 1 through 100 {
+        &.cut#{$item}{
+            max-width: #{$item}rem
+        }
+    }
+
+    & .list-caption{
+        letter-spacing: 1px;
+
+        text-align: center;
+    
+        @extend .list-item
+    }
+
+    & > .list-item{
+        font-size: inherit / 2;
+
+        margin: 0;
+        padding: 1.3rem;
+
+        border: 1px solid rgb(202, 200, 200);
+
+        transition: background-color .6s ease-in-out,
+                    color .6s ease-in-out;
+
+        &.pointer{
+            cursor: pointer;
+        }
+
+        &.alias{
+            cursor: alias;
+        }
+
+        &.all{
+            cursor: all-scroll;
+        }
+
+        &.default{
+            cursor: default;
+        }
+
+        &.grab{
+            cursor: grab;
+        }
+
+        &.move{
+            cursor: move;
+        }
+        
+        & > *{
+            padding: .2rem;
+        }
+
+        &.center{
+            @extend .flex--cc;
+        }
+        
+        &:hover{
+            transition: background-color .6s ease-in-out,
+                        color .6s ease-in-out;
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+        }
+    }
+}
+
+// card
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    grid-gap: 1.2rem;
+}
+
+.card{
+    $width: 0;
+
+    box-shadow: 0 0 2px 3px rgba(236, 83, 236, 0.808);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+
+    overflow: hidden;
+
+    background-color: transparent;
+    @for $item from 1 through 16 {
+        &.wd#{$item}{
+            $width: #{$item}rem
+        }
+    }
+
+    max-width: $width;
+
+    display: flex;
+    flex-flow: column wrap;
+
+    gap: .4rem;
+
+    .card__img{
+        height: 8rem;
+        max-width: $width;
+    }
+
+    .card__img--div{
+        @extend .card__img;
+
+        background-clip: content-box;
+        background-size: cover;
+        background-attachment: local;
+        background-origin: content-box;
+    }
+
+    .card__container{
+        display: grid;
+
+        grid-template-areas: "title" 
+                             "subtext" 
+                             "link";
+
+        align-items: center;
+        text-align: center;
+
+        &-title{
+            grid-area: title;
+
+            font-size: 2.4rem;
+
+            margin-bottom: 7px;
+        }
+
+        &-subtext{
+            grid-area: subtext;
+
+            font-size: .8rem;
+        }
+
+        &-link{
+            height: 100%;
+
+            @extend .flex--cc;
+
+            font-size: 2rem;
+
+            background-color: transparent;
+            color: #000;
+
+            grid-area: link;
+
+            border-radius: 3px;
+            margin: 4px;
+
+            text-decoration: none;
+            text-shadow: 1px 0 2px #000;
+
+            transition: background-color .6s ease-in,
+            text-shadow .8s ease-in-out,
+            color 1s ease-out;
+
+            border-top: 3px solid rgba(236, 83, 236, 0.808);
+
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            &:hover{
+                background-color: #000;
+                text-shadow: 1px 0 2px rgb(219, 143, 226);
+                color: rgb(150, 150, 231);
+
+                transition: background-color .6s ease-in,
+                            text-shadow .8s ease-in-out,
+                            color 1s ease-out;
+
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+        }
+    }
+}
+
+// slider
+.container__slider{
+    overflow: hidden;
+
+    $height: 300px;
+
+    height: $height;
+
+    border: 3px solid rgba(175, 97, 145, 0.63);
+    
+    border-left: none;
+    border-right: none;
+
+    position: relative;
+
+    ._defaultSettingArrows{
+        position: absolute;
+
+        top: 44%;
+        z-index: 9999;
+
+        color:rgb(228, 36, 196);
+
+        font-size: 2.4rem;
+
+        cursor: pointer;
+
+        transition: color .8s ease-in-out;
+        &:hover{
+            color: rgb(173, 107, 211);
+
+            transition: color .8s ease-in-out;
+        }
+    }
+    .after{
+        @extend ._defaultSettingArrows;
+        right: 10px;
+    }
+
+    .before{
+        @extend ._defaultSettingArrows;
+        left: 10px;
+    }
+
+    .slider{
+        display: flex;
+        flex-flow: row nowrap;
+        transition: transform .6s ease-in-out;
+
+        ._defaultSettings{
+            font-size: 2rem;
+            color:rgb(241, 26, 109);
+
+            text-shadow: 0 3px 6px 10px rgb(241, 26, 109);
+
+            cursor: pointer;
+        }
+
+        .active{
+            order: 1;
+        }
+
+        position: relative;
+
+        z-index: 100;
+
+        .slider__img{
+            height: $height;
+
+            z-index: 1;
+        }
+
+        border-radius: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+// <div class="cards">
+// <div class="card">
+//     <img 
+//     class="card__img"
+//     src="../1366x768_px_Anime_Girls_death_scythe_weapon-797535.jpg" alt="">
+//     <div class="card__container">
+//         <h1 class="card__container-title">HelloTitle</h1>
+//         <p class="card__container-subtext">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis voluptate repudiandae sequi. Nemo, illum. Dolores dolorem distinctio velit nobis numquam.</p>
+//         <a rel="stylesheet" href="#"
+//         class="card__container-link">Hello</a>
+//     </div>
+// </div>
+
+// <div class="card">
+//     <img 
+//     class="card__img"
+//     src="../1366x768_px_Anime_Girls_death_scythe_weapon-797535.jpg" alt="">
+//     <div class="card__container">
+//         <h1 class="card__container-title">HelloTitle</h1>
+//         <p class="card__container-subtext">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis voluptate repudiandae sequi. Nemo, illum. Dolores dolorem distinctio velit nobis numquam.</p>
+//         <a rel="stylesheet" href="#"
+//         class="card__container-link">Hello</a>
+//     </div>
+// </div>
+
+// <div class="card">
+//     <img 
+//     class="card__img"
+//     src="../1366x768_px_Anime_Girls_death_scythe_weapon-797535.jpg" alt="">
+//     <div class="card__container">
+//         <h1 class="card__container-title">HelloTitle</h1>
+//         <p class="card__container-subtext">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis voluptate repudiandae sequi. Nemo, illum. Dolores dolorem distinctio velit nobis numquam.</p>
+//         <a rel="stylesheet" href="#"
+//         class="card__container-link">Hello</a>
+//     </div>
+// </div>
+
+// <div class="card">
+//     <img 
+//     class="card__img"
+//     src="../1366x768_px_Anime_Girls_death_scythe_weapon-797535.jpg" alt="">
+//     <div class="card__container">
+//         <h1 class="card__container-title">HelloTitle</h1>
+//         <p class="card__container-subtext">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis voluptate repudiandae sequi. Nemo, illum. Dolores dolorem distinctio velit nobis numquam.</p>
+//         <a rel="stylesheet" href="#"
+//         class="card__container-link">Hello</a>
+//     </div>
+// </div>
+// </div>
