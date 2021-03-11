@@ -1,0 +1,47 @@
+<!-- responsive on 372px min - width -->
+
+<div class="todo">
+    <header class="todo__header">
+        <h1 class="todo__header-title">
+            {{ titleTodo | uppercase}}
+        </h1>
+    </header>
+
+    <main class="todo__main">
+        <form 
+        onsubmit="return false;"
+        class="todo__main-form"
+        action="">
+            <div class="addRoom">
+                <input 
+                #InputTodo
+                onkeydown="this.style.width = ((this.value.length + 1) * 11) + 'px';"
+                type="text" class="input">
+                <button class="btn"
+                (click)="toAddTodo()">Add Todo</button>
+            </div>
+            <div
+            class="todo__main-form-text" 
+            *ngFor="let todo of todoList; let i = index">
+                <p
+                class="todoList"
+                (click)="toggleDone(i)"
+                [ngClass]="{ done: !todo.isComplete }"
+                >
+                    {{ i + 1 }} - {{ todo.name }}
+                </p>
+
+                <button 
+                type="button"
+                class="btn"
+                (click)="toRemove(i)"
+                >Remove</button>
+            </div>
+        </form>
+        
+    </main>
+
+    <footer class="todo__footer">
+        &copy; No Copyright
+    </footer>
+</div>
