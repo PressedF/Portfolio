@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container--wrapper">
+        <nav class="navigation">
+            <ul class="list">
+                <li class="list-item">
+                    <a href="#">Home</a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#">Services</a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#">Images</a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#">Magick</a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#">Face</a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#">Imp</a>
+                </li>
+            </ul>
+
+            <div class="after">></div>
+        </nav>
+    </div>
+
+    <script>
+        const query = document.querySelector('.after');
+        const queryList = document.querySelector('.list');
+        const queryNav = document.querySelector('.navigation');
+
+        queryNav.style.width = (this.width + queryNav.style.width) + "px";
+
+        let rotate = query.onclick = function(){
+            queryNav.classList.toggle('active');
+
+            query.style.transform = "rotate(-180deg)";
+
+            if(queryList.style.visibility === "hidden")
+            {
+                queryList.style.visibility = "visible";
+                query.style.transform = "rotate(0deg)";
+            }
+            else{
+                queryList.style.visibility = "hidden";
+            }
+
+
+            query.removeEventListener('transitionend', rotate);
+        }
+
+
+        if(rotate.click)
+            query.addEventListener('transitionend', rotate);
+
+
+
+
+    </script>
+</body>
+</html>
